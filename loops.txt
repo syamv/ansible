@@ -1,0 +1,19 @@
+with_items
+
+--- # webserver setup
+- hosts: server2
+  remote_user: test5000
+  become: yes
+  vars:
+      pkg: httpd  
+  tasks:
+    - name: installing httpd service
+      yum: name={{item}}  state=installed
+      with_items:
+         - httpd
+         - lynx
+         - curl
+    - name: copy index.html
+      copy:src= index.html dest=/var/www/html/index.html
+    - name: start httpd  service
+      service: name=httpd  state=started

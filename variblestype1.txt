@@ -1,0 +1,13 @@
+--- # webserver setup
+- hosts: server2
+  remote_user: test5000
+  become: yes
+  vars:
+      pkg: httpd  
+  tasks:
+    - name: installing {{pkg}} service
+      yum: name={{pkg}}  state=installed
+    - name: copy index.html
+      copy:src= index.html dest=/var/www/html/index.html
+    - name: start {{pkg}}  service
+      service: name={{pkg}}  state=started

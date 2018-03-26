@@ -1,0 +1,25 @@
+--- # creating vpc
+- hosts: localhost
+  connection: local
+  remote_users: test5000
+  root: yes
+  gather_facts: no
+  vars_files:
+    - awscredit.yml
+  tasks:
+    - name: create vpc
+      ec2_vpc_net:
+          aws_access_key: "{{aws_id}}"
+          aws_secret_key: "((aws_keys}}"
+          region: "{{aws_region))"
+          name: vpc23
+          state: present
+          cidr_block: 20.0.0.0/16
+      register: vpcnet
+      debug: var=vpcnet
+
+aws_key: eAHgPUWv+2JSFwPB8gnI4Eb2+b0pIlQ8/u5rUWlK
+aws_id: AKIAJVTUWDTNPODC6ZPA
+
+aws_region: us-west-2
+

@@ -1,0 +1,22 @@
+In ansible
+package should be installed
+start the service
+to know the packages to be installed command is ansible-doc service
+*to manage in group and run httpd in different servers we have to run get 
+get into vi hosts
+[webserver]
+server1
+server2
+
+--- # webserver setup
+- hosts: server2
+  remote_user:test5000
+  become: yes
+  tasks:
+    - name:installing hhtpd service
+      yum:name=httpd state=installed
+    - name:copy index.html
+      copy:src=index.html dest=/var/www/html/index.html
+    - name:start httpd service
+      service: name=httpd state=started
+

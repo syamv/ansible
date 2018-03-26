@@ -1,0 +1,22 @@
+---# webserver setup
+- Hosts : server2
+  remote_user: test5000
+  become : yes
+  tasks:
+    - name: Downloading tomcat server
+      get_url: http://redrockdigimark.com/apachemirror/tomcat/tomcat-7/v7.0.84/bin/apache-tomcat-7.0.84.tar.gz dest=/tmp
+   -  name: create tomcat folder
+    # command: mkdir /usr/local/tomcat
+      file:path=/usr/local/tomcat state=directory
+   -  name: Eatract Archive
+      unarchive: src=/tmp/apache-tomcat-7.0.84.tar.gz dest=/usr/local/tomcat copy=no
+   -  name: create tomcat users
+      copy: src=/home/test5000/Desktop/tomcat-users.xml dest=/usr/local/tomcat/apache-tomcat-7.0.84/conf/
+   -  name: deploy application
+      copy: src=/home/test5000/Desktop/sample.war dest=/usr/local/tomcat/apache-tomcat-7.0.84/webapps/
+   -  name: start tomcat
+      command: nohup /usr/local/tomcat/apache-tomcat-7.0.84/bin/catalina.sh start &
+      
+    
+      
+  

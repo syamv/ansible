@@ -1,0 +1,12 @@
+---# webserver setup
+- hosts : server2
+  remote_user: test5000
+  become : yes
+  tasks:
+    - name: using template
+      template: src=xyz.j2 des=/etc/conf
+
+befor that we need to create the template file like abc.j2 extention
+ hello
+{{ansible_bios_date}}
+

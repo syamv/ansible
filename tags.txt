@@ -1,0 +1,49 @@
+--- # webserver setup
+- hosts: server2
+  remote_user: test5000
+  become: yes
+  tasks:
+    - name: installing httpd service
+      yum: name=httpd  state=installed
+      tags:
+        - install
+    - name: copy index.html
+      copy: src=index.html dest=/var/www/html/index.html
+      tags:   
+        - copy
+    - name: start httpd  service
+      service: name=httpd  state=started
+                                        
+
+note:
+ansible-playbook tags.yml --tags "install"
+It will only run the tag which you have provided
+ansible-playbook tags.yml -skip--tags "install" 
+It will skip the install and run the remaining tasks 
+
+note1:
+ tag always
+ irrespect to any thing this task wil run 100PERCENT 
+
+--- # webserver setup
+- hosts: server2
+  remote_user: test5000
+  become: yes
+  tasks:
+    - name: installing httpd service
+      yum: name=httpd  state=installed
+      tags:
+        - install
+    - name: copy index.html
+      copy: src=index.html dest=/var/www/html/index.html
+      tags:   
+        - copy
+    - name: start httpd  service
+      service: name=httpd  state=started
+      tags:
+        - always
+if we dont want to use tags we can use the below
+note2:ansible-playbook --start-at-task "copy index.html"
+so it will start from the copy.
+we control the task by   
+
