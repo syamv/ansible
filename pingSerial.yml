@@ -1,8 +1,9 @@
 ---
 - hosts:
-    - localhost 
+    - localhost
+    - 10.142.0.2 
   serial: 1
   become: false
   tasks:
     - ping:
-
+    - shell : df -h | awk '$5>70' | wc -l

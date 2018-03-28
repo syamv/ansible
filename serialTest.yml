@@ -1,0 +1,25 @@
+---
+ - hosts: localhost
+   serial: 1
+   connection: local
+   gather_facts: False
+   vars:
+     filext: ".txt"
+   tasks:
+     - name: get the username running the deploy
+       local_action: command whoami
+       register: username_on_the_host
+
+     - name: get date timestamp
+       shell: "date +%m%d%Y_%H%M%S"
+       register: tstamp
+
+     - name: get current dir
+       local_action: command pwd
+       register: current_dir
+
+     - name: create dir
+       file: path={{ current_dir.stdout }}/ansiblelog state=directory
+
+    #- name: check the current dir
+    #  debug: var={{ current_dir.stdout }}
