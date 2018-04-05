@@ -16,7 +16,7 @@
          charset: utf-8
          subject: Email Notification by Ansible Automation Playbook
          from: syam.devops@gmail.com
-         to: syam.devops@gmail.com
+         to: Aarthielizabeth_T@infosys.com,Manimekala_B@infosys.com
          subject: Installation Update
          body: 'The installation is complete.'
          body: Hostname is {{ ansible_hostname }} has been successfully provisioned. Test Email by Anisble Module
